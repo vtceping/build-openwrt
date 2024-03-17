@@ -49,8 +49,8 @@ git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smar
 # popd
 
 # 替换udpxy为修改版
-rm -rf feeds/packages/net/udpxy/Makefile
-cp -rf ${GITHUB_WORKSPACE}/patch/udpxy/Makefile feeds/packages/net/udpxy/
+# rm -rf feeds/packages/net/udpxy/Makefile
+# cp -rf ${GITHUB_WORKSPACE}/patch/udpxy/Makefile feeds/packages/net/udpxy/
 
 # 卸载酸酸乳
 # ./scripts/feeds uninstall luci-app-ssr-plus
