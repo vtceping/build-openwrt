@@ -43,6 +43,10 @@ rm -rf feeds/packages/net/smartdns
 cp -rf ${GITHUB_WORKSPACE}/patch/smartdns feeds/packages/net
 git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smartdns_luci
 
+# golang 1.22
+rm -rf feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+
 # pushd package/emortal/
 # rm -rf luci-app-omcproxy
 # git clone -b 18.06 https://github.com/lwb1978/luci-app-omcproxy.git
