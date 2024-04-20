@@ -33,8 +33,8 @@ sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generat
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=524288' package/base-files/files/etc/sysctl.conf
 
 # 替换Passwall为smartdns版
-rm -rf feeds/luci/applications/luci-app-passwall
-rm -rf package/feeds/luci/luci-app-passwall
+# rm -rf feeds/luci/applications/luci-app-passwall
+# rm -rf package/feeds/luci/luci-app-passwall
 git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
 git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall_packages
 
