@@ -20,6 +20,12 @@ sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generat
 #
 # ------------------------------- Main source ends -------------------------------
 
+sed -i '1i src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
+sed -i '2i src-git small https://github.com/kenzok8/small' feeds.conf.default
+./scripts/feeds update -a && rm -rf feeds/luci/applications/luci-app-mosdns
+rm -rf feeds/packages/net/{alist,adguardhome,mosdns,xray*,v2ray*,v2ray*,sing*,smartdns}
+rm -rf feeds/packages/utils/v2dat
+
 # ------------------------------- Other started -------------------------------
 #
 # Add luci-app-amlogic
@@ -33,10 +39,10 @@ sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generat
 sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=524288' package/base-files/files/etc/sysctl.conf
 
 # 替换Passwall为smartdns版
-rm -rf feeds/luci/applications/luci-app-passwall
-rm -rf package/feeds/luci/luci-app-passwall
-git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
-git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall_packages
+# rm -rf feeds/luci/applications/luci-app-passwall
+# rm -rf package/feeds/luci/luci-app-passwall
+# git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
+# git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall_packages
 
 # 替换immortalwrt 软件仓库smartdns版本为官方最新版
 # rm -rf feeds/packages/net/smartdns
