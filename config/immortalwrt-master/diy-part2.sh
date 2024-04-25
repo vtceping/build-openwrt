@@ -37,6 +37,7 @@ rm -rf package/feeds/luci/luci-app-passwall
 git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
 git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall_packages
 
+
 # 替换immortalwrt 软件仓库smartdns版本为官方最新版
 rm -rf feeds/packages/net/smartdns
 cp -rf ${GITHUB_WORKSPACE}/patch/smartdns feeds/packages/net
