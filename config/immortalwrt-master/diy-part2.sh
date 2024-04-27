@@ -43,8 +43,8 @@ git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git 
 # git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smartdns_luci
 
 # golang 1.22
-rm -rf feeds/packages/lang/golang
-git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+# rm -rf feeds/packages/lang/golang
+# git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
 # pushd package/emortal/
 # rm -rf luci-app-omcproxy
