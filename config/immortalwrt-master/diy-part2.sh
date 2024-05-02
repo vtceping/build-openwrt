@@ -58,8 +58,8 @@ git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smar
 # find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHCODELOAD/PKG_SOURCE_URL:=https:\/\/codeload.github.com/g' {}
 
 # 替换udpxy为修改版
-# rm -rf feeds/packages/net/udpxy/Makefile
-# cp -rf ${GITHUB_WORKSPACE}/patch/udpxy/Makefile feeds/packages/net/udpxy/
+rm -rf feeds/packages/net/udpxy/Makefile
+cp -rf ${GITHUB_WORKSPACE}/patch/udpxy/Makefile feeds/packages/net/udpxy/
 
 # 卸载酸酸乳
 # ./scripts/feeds uninstall luci-app-ssr-plus
