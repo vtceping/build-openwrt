@@ -28,8 +28,8 @@ sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generat
 # Apply patch
 # git apply ../config/patches/{0001*,0002*}.patch --directory=feeds/luci
 
-# 最大连接数修改为524288
-sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=524288' package/base-files/files/etc/sysctl.conf
+# 最大连接数修改为1048576
+sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=1048576' package/base-files/files/etc/sysctl.conf
 
 # 替换Passwall为smartdns版
 rm -rf feeds/luci/applications/luci-app-passwall
