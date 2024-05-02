@@ -34,13 +34,13 @@ sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=1048576' packa
 # 替换Passwall为smartdns版
 rm -rf feeds/luci/applications/luci-app-passwall
 rm -rf package/feeds/luci/luci-app-passwall
-git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
+git clone  --depth=1 -b luci-smartdns-dev --single-branch https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
 git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall_packages
 
 # 替换immortalwrt 软件仓库smartdns版本为官方最新版
-# rm -rf feeds/packages/net/smartdns
-# cp -rf ${GITHUB_WORKSPACE}/patch/smartdns feeds/packages/net
-# git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smartdns_luci
+rm -rf feeds/packages/net/smartdns
+cp -rf ${GITHUB_WORKSPACE}/patch/smartdns feeds/packages/net
+git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smartdns_luci
 
 # golang 1.22
 # rm -rf feeds/packages/lang/golang
