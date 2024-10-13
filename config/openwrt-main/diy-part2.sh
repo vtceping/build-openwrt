@@ -16,11 +16,19 @@ sed -i "s|DISTRIB_REVISION='.*'|DISTRIB_REVISION='R$(date +%Y.%m.%d)'|g" package
 echo "DISTRIB_SOURCECODE='immortalwrt'" >>package/base-files/files/etc/openwrt_release
 
 # Modify default IP（FROM 192.168.1.1 CHANGE TO 192.168.31.4）
-sed -i 's/192.168.1.1/192.168.5.2/g' package/base-files/files/bin/config_generate
+sed -i 's/192.168.1.1/192.168.5.1/g' package/base-files/files/bin/config_generate
 #
 # ------------------------------- Main source ends -------------------------------
 
 # ------------------------------- Other started -------------------------------
+
+
+ # Add luci-app-amlogic
+ rm -rf feeds/smpackage/{base-files,dnsmasq,firewall*,fullconenat,libnftnl,nftables,ppp,opkg,ucl,upx,vsftpd-alt,miniupnpd-iptables,wireless-regdb}
+ rm -rf feeds/luci/themes/luci-theme-argon && rm -rf feeds/other/{luci-app-adguardhome,luci-app-dockerman}
+ rm -rf feeds/lienol/luci-app-fileassistant && rm -rf feeds/packages/net/{adguardhome,smartdns}
+ sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
+
 #
 # Add luci-app-amlogic
 # svn co https://github.com/ophub/luci-app-amlogic/trunk/luci-app-amlogic package/luci-app-amlogic
@@ -29,23 +37,23 @@ sed -i 's/192.168.1.1/192.168.5.2/g' package/base-files/files/bin/config_generat
 # git apply ../config/patches/{0001*,0002*}.patch --directory=feeds/luci
 #
 
-# 最大连接数修改为65535
-sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=65535' package/base-files/files/etc/sysctl.conf
+# 最大连接数修改为524288
+sed -i '/customized in this file/a net.netfilter.nf_conntrack_max=524288' package/base-files/files/etc/sysctl.conf
 
 # 替换Passwall为smartdns版
 # rm -rf feeds/luci/applications/luci-app-passwall
 # rm -rf package/feeds/luci/luci-app-passwall
-git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
-git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall_packages
+# git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall.git package/passwall_luci
+# git clone  --depth=1 https://github.com/xiaorouji/openwrt-passwall-packages.git package/passwall_packages
 
 # 替换immortalwrt 软件仓库smartdns版本为官方最新版
 # rm -rf feeds/packages/net/smartdns
 # cp -rf ${GITHUB_WORKSPACE}/patch/smartdns feeds/packages/net
-git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smartdns_luci
+# git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smartdns_luci
 
 # golang 1.22
-# rm -rf feeds/packages/lang/golang
-# git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
+rm -rf feeds/packages/lang/golang
+git clone --depth=1 https://github.com/sbwml/packages_lang_golang feeds/packages/lang/golang
 
 # pushd package/emortal/
 # rm -rf luci-app-omcproxy
@@ -53,10 +61,10 @@ git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smar
 # popd
 
 # 修正部分从第三方仓库拉取的软件 Makefile 路径问题
-# find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
-# find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/golang\/golang-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang-package.mk/g' {}
-# find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHREPO/PKG_SOURCE_URL:=https:\/\/github.com/g' {}
-# find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHCODELOAD/PKG_SOURCE_URL:=https:\/\/codeload.github.com/g' {}
+find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/luci.mk/$(TOPDIR)\/feeds\/luci\/luci.mk/g' {}
+find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/..\/..\/lang\/golang\/golang-package.mk/$(TOPDIR)\/feeds\/packages\/lang\/golang\/golang-package.mk/g' {}
+find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHREPO/PKG_SOURCE_URL:=https:\/\/github.com/g' {}
+find package/*/ -maxdepth 2 -path "*/Makefile" | xargs -i sed -i 's/PKG_SOURCE_URL:=@GHCODELOAD/PKG_SOURCE_URL:=https:\/\/codeload.github.com/g' {}
 
 # 替换udpxy为修改版
 # rm -rf feeds/packages/net/udpxy/Makefile
@@ -64,5 +72,8 @@ git clone --depth=1 https://github.com/pymumu/luci-app-smartdns.git package/smar
 
 # 卸载酸酸乳
 # ./scripts/feeds uninstall luci-app-ssr-plus
+
+./scripts/feeds update -a
+./scripts/feeds install -a
 
 # ------------------------------- Other ends -------------------------------
