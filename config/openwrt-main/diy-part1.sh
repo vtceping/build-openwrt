@@ -6,7 +6,6 @@
 # Source code repository: https://github.com/openwrt/openwrt / Branch: main
 #========================================================================================================================
 
-
 # Add a feed source
 # git clone https://github.com/xiaorouji/openwrt-passwall-packages.git package/openwrt-passwall
 # git clone https://github.com/xiaorouji/openwrt-passwall.git package/passwall
@@ -14,8 +13,8 @@
 
 # sed -i '$a src-git lienol https://github.com/Lienol/openwrt-package' feeds.conf.default
 # sed -i '$a src-git kenzo https://github.com/kenzok8/openwrt-packages' feeds.conf.default
-# sed -i '$a src-git small https://github.com/kenzok8/small' feeds.conf.default
+# sed -i '$a src-git smpackage https://github.com/kenzok8/small-package' feeds.conf.default
+sed -i '$a src-git smpackage https://github.com/linhahaz/small-package' feeds.conf.default
 
 # other
 # rm -rf package/utils/{ucode,fbtest}
-
