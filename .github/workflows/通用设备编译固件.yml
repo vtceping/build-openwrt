@@ -78,7 +78,7 @@ jobs:
               REPO_BRANCH="openwrt-23.05"
               TAGS_NAME="immortalwrt"
           elif [[ "${{ inputs.source_branch }}" == *"Lienol"* ]]; then
-              REPO_URL="https://github.com/Lienol/openwrt"
+              REPO_URL="https://github.com/linhahaz/openwrt/commit/3d59859689dedff5dad25918a1120ffe3283c439"
               REPO_BRANCH="23.05"
               TAGS_NAME="Lienol"
           else
